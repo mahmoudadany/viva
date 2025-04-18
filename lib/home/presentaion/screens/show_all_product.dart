@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:viva/home/presentaion/controller/home_controller.dart';
+
+import 'display_item.dart';
+
+class ShowAllProduct extends GetWidget<HomeController> {
+  List<dynamic> wearProducts;
+  ShowAllProduct(this.wearProducts);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:
+          [
+            Text("Found \n ${wearProducts.length} Results"),
+            const SizedBox(height: 10.0,),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 10.0,mainAxisSpacing: 10.0,),
+                itemCount: wearProducts.length,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    Get.to(DisplayItem(
+                      controller.allProduct.value[index]));
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children:
+                    [
+                      Expanded(
+                        child: Container(
+                            alignment: AlignmentDirectional.center,
+                            width: double.infinity,
+                            child: Image(image: NetworkImage(controller.allProduct.value[index].images[0]),width: 130,height: 130,)),
+                      ),
+                      const SizedBox(height: 10.0,),
+                      Text(controller.allProduct.value[index].title,style: TextStyle(fontWeight: FontWeight.bold),maxLines: 1,overflow: TextOverflow.ellipsis,),
+                      const SizedBox(height: 3.0,),
+                      Text('\$ ${controller.allProduct.value[index].price}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20.0),)
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

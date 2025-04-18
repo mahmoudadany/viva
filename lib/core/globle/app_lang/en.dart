@@ -1,0 +1,33 @@
+const Map<String,String> en=
+{
+  'signUpText':"Create \nYour Account",
+  'loginText':"Login into \nYour Account",
+  'name':"Enter your name",
+  'emailAddress':"Email Address",
+  'emailAddress*':"***@***.com",
+  'password':'Password',
+  'confirmPassword':'Confirm Password',
+  'forgetPassword':'Forget Password?',
+  'newPassword':'********',
+  'password*':'********',
+  'verificationCode':'Verification Code',
+  'enterVerificationCode':'Enter Verification Code',
+  'createNewPassword':'Create New Password',
+  'yourPasswordHasBeenChange':'Your Password Has Been Change',
+  'welcomeBackDiscoverNow':'Welcome Back! Discover Now',
+  'browseHome':'Browse Home',
+  'login':'LogIn',
+  'confirm':'Confirm',
+  'or':'-OR-',
+  'don\'t have an account':'don\'t have an account?',
+  'alreadyHaveAccount':'Already have account?',
+  'signUp':'Sign Up',
+  'send':'Send',
+  'signInWithGoogle':'Sign In With Google',
+  'confirmPasswordMassage':'Enter email associated with your account and we will send an email with intructions to reset your password',
+  'verificationCodeMassage':'please enter the verification code we sent to your email address',
+  'createNewPasswordMassage':'Your new passwoed must be different frim previously used password',
+//   home
+
+  'vivaStore':"Viva Store",
+};

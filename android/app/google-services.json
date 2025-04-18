@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "22312996421",
+    "project_id": "viva-57a54",
+    "storage_bucket": "viva-57a54.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22312996421:android:cb80668406a3e810dd9d2c",
+        "android_client_info": {
+          "package_name": "com.mmrabie.viva"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCwcw6QMq8_1vRoxHOhHcQr0XgSV2Odng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
