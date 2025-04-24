@@ -6,7 +6,6 @@ import 'package:viva/core/exception/failure.dart';
 
 abstract class BaseAuthRepository{
 
-  // List<OnBoarding> showOnBoardingItem();
 
   Future<Either<Failure,User>> signInWithGoogleOrFacebook(AuthCredential authCredential);
 
@@ -16,7 +15,6 @@ abstract class BaseAuthRepository{
 
   Future<Either<Failure,bool>> addUserInUserCollection(MainUser user);
 
-  // Future<Either<Failure,MainUser>> signInWithFacebook(AuthCredential credential);
 
 
 }

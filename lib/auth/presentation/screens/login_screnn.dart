@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:viva/auth/presentation/components/components.dart';
 import 'package:viva/auth/presentation/controller/auth_controller.dart';
-import 'package:viva/auth/presentation/screens/forget_password_screen.dart';
 import 'package:viva/core/components/components.dart';
 import 'package:viva/core/globle/app_color/app_color_light.dart';
 
@@ -38,10 +37,10 @@ class LoginScrenn extends GetWidget<AuthController> {
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Email shoud not be empty";
+                      return "emailEmpty".tr;
                     }
                     if (!(value.contains('@') && value.contains(".com"))) {
-                      return "email address fromat ****@****.com";
+                      return "emailFormat".tr;
                     }
                     return null;
                   },
@@ -69,25 +68,25 @@ class LoginScrenn extends GetWidget<AuthController> {
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Password should not be empty";
+                            return "PasswordEmpty".tr;
                           }
-                          if (value.length < 8) {
-                            return "password length is low";
+                          if (value.length < 6) {
+                            return "passwordLow".tr;
                           }
                           return null;
                         },
                       ),
                 ),
                 const SizedBox(height: 10.0),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    child: Text("forgetPassword".tr),
-                    onPressed: () {
-                      Get.to(ForgetPasswordScreen());
-                    },
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.centerRight,
+                //   child: TextButton(
+                //     child: Text("forgetPassword".tr),
+                //     onPressed: () {
+                //       Get.to(ForgetPasswordScreen());
+                //     },
+                //   ),
+                // ),
                 const SizedBox(height: 20.0),
                 Obx(()=> Align(
                     alignment: Alignment.center,
@@ -108,7 +107,7 @@ class LoginScrenn extends GetWidget<AuthController> {
                               width: 25.0,
                               child: CircularProgressIndicator(color: Colors.white,)),
                           const SizedBox(width: 10.0,),
-                          Text("Loading...",style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                          Text("loading".tr,style: TextStyle(color: Colors.white,fontSize: 20.0),),
                         ],
                       ):Text(
                         "login".tr,
@@ -178,14 +177,14 @@ class LoginScrenn extends GetWidget<AuthController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("don't have an account".tr),
+                    Text("createAccount".tr),
                     const SizedBox(width: 5.0),
                     TextButton(
                       onPressed: () {
                         Get.off(SignUpScreen());
                       },
                       child: Text(
-                        "sign up".tr,
+                        "signUp".tr,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,

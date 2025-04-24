@@ -96,9 +96,9 @@ class DisplayItem extends GetWidget<HomeController> {
                           Expanded(
                             child: Text(
                               textAlign: TextAlign.end,
-                              "\$ ${product.price}",
+                              "${product.price} EGP",
                               style: const TextStyle(
-                                fontSize: 26.0,
+                                fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -142,7 +142,7 @@ class DisplayItem extends GetWidget<HomeController> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Colors"),
+                              Text("color".tr),
                               SizedBox(
                                 height: 50.0,
                                 width: 120.0,
@@ -190,7 +190,7 @@ class DisplayItem extends GetWidget<HomeController> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Size"),
+                              Text("size".tr),
                               SizedBox(
                                 height: 50.0,
                                 width: 120.0,
@@ -231,8 +231,8 @@ class DisplayItem extends GetWidget<HomeController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Description",
+                          Text(
+                            "description".tr,
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
@@ -275,8 +275,8 @@ class DisplayItem extends GetWidget<HomeController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Similar Product",
+                          Text(
+                            "similarProduct".tr,
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
@@ -357,7 +357,7 @@ class DisplayItem extends GetWidget<HomeController> {
                                             ),
                                             const SizedBox(height: 3.0),
                                             Text(
-                                              '\$ ${controller.similarProduct[index].price}',
+                                              '${controller.similarProduct[index].price} EGP',
                                               maxLines: 1,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -382,8 +382,8 @@ class DisplayItem extends GetWidget<HomeController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Reviews",
+                          Text(
+                            "reviews".tr,
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
@@ -607,7 +607,7 @@ class DisplayItem extends GetWidget<HomeController> {
                       Icon(Icons.shopping_bag, color: Colors.white, size: 30.0),
                       const SizedBox(width: 10.0),
                       Text(
-                        "Add To Cart",
+                        "addToCart".tr,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,

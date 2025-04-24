@@ -9,22 +9,19 @@ import '../../../core/globle/app_color/app_color_light.dart';
 
 class CaretComponent extends GetWidget<HomeController>{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getProductPrice();
       controller.getTotal();
       controller.getCartItems();
+      controller.total.refresh();
+      controller.productPrice.refresh();
     },);
 
     return Obx(
       () =>  Scaffold(
-        // appBar: AppBar
-        //   (
-        //   title: Text("Your Cart",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25.0),),
-        //   centerTitle: true,
-        // ),
         body:  controller.cartLoading.value?
-        const Center(child: CircularProgressIndicator(),):
+        const Center(child: CircularProgressIndicator(),) :
         Column(
           children: [
             Expanded(
@@ -59,11 +56,11 @@ class CaretComponent extends GetWidget<HomeController>{
                           width: 120,
                           child: GestureDetector(
                             onTap: () {
-                              Get.to(DisplayItem(controller.cartItems[index]));
+                              Get.to(DisplayItem(HomeController.cartItems[index]));
                             },
                             child: Image(
                               image: NetworkImage(
-                                controller.cartItems[index].images[0],
+                                HomeController.cartItems[index].images[0],
                               ),
                             ),
                           ),
@@ -79,7 +76,7 @@ class CaretComponent extends GetWidget<HomeController>{
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      controller.cartItems[index].title,
+                                      HomeController.cartItems[index].title,
                                       maxLines: 1,
                                       style: const TextStyle(
                                         fontSize: 13.0,
@@ -89,7 +86,7 @@ class CaretComponent extends GetWidget<HomeController>{
                                     ),
                                   ),
                                   Obx(() =>  Checkbox(
-                                    value: controller.cartItems[index].check,
+                                    value: HomeController.cartItems[index].check,
                                     activeColor:
                                     AppColorLight.ratingStarColor,
                                     onChanged: (value) {
@@ -101,7 +98,8 @@ class CaretComponent extends GetWidget<HomeController>{
                                 ],
                               ),
                               Text(
-                                "\$ ${controller.cartItems[index].price}",
+                                " ${HomeController.cartItems[index].price} EGP",
+                                maxLines: 1,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16.0,
@@ -115,14 +113,15 @@ class CaretComponent extends GetWidget<HomeController>{
                                     CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Size: ${controller.cartItems[index].selectedSize}",
+                                        "${"size".tr}: ${HomeController.cartItems[index].selectedSize}",
+                                        maxLines: 1,
                                         style: const TextStyle(
                                           color: Colors.grey,
                                           fontSize: 12.0,
                                         ),
                                       ),
                                       Text(
-                                        "Color: ${controller.cartItems[index].selectedColor}",
+                                        "${"color".tr}: ${HomeController.cartItems[index].selectedColor}",
                                         maxLines: 1,
                                         style: const TextStyle(
                                           fontSize: 16.0,
@@ -153,7 +152,7 @@ class CaretComponent extends GetWidget<HomeController>{
                                             color: Colors.grey,
                                           ),
                                           onTap: () {
-                                            int count=controller.cartItems[index].userItemCount;
+                                            int count=HomeController.cartItems[index].userItemCount;
                                             if(count==1){
                                               Get.snackbar("Cart failure", "you shoud chose one item",snackPosition: SnackPosition.BOTTOM);
                                               return;
@@ -163,7 +162,7 @@ class CaretComponent extends GetWidget<HomeController>{
                                         ),
                                         const SizedBox(width: 10.0),
                                         Obx(() => Text(
-                                          controller.cartItems[index].userItemCount.toString(),
+                                          HomeController.cartItems[index].userItemCount.toString(),
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 20.0,
@@ -177,8 +176,8 @@ class CaretComponent extends GetWidget<HomeController>{
                                             color: Colors.grey,
                                           ),
                                           onTap: () {
-                                            int count=controller.cartItems[index].userItemCount;
-                                            if(count>controller.cartItems[index].itemCount){
+                                            int count=HomeController.cartItems[index].userItemCount;
+                                            if(count>HomeController.cartItems[index].itemCount){
                                               Get.snackbar("Cart failure", "you shoud chose one item2");
                                               return;
                                             }
@@ -192,6 +191,7 @@ class CaretComponent extends GetWidget<HomeController>{
                                   const SizedBox(width: 10.0),
                                 ],
                               ),
+
                             ],
                           ),
                         ),
@@ -199,7 +199,7 @@ class CaretComponent extends GetWidget<HomeController>{
                     ),
                   ),
                 ),
-                itemCount: controller.cartItems.length,
+                itemCount: HomeController.cartItems.length,
               ),
             ),
             Padding(
@@ -215,10 +215,10 @@ class CaretComponent extends GetWidget<HomeController>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Product Price",
+                            "productPrice".tr,
                             style: TextStyle(color: Colors.grey, fontSize: 14.0),
                           ),
-                          Obx(()=> Text("\$${controller.productPrice.value}", style: TextStyle(fontSize: 14.0))),
+                          Obx(()=> Text("${controller.productPrice.value} EGP", style: TextStyle(fontSize: 14.0))),
                         ],
                       ),
                       const SizedBox(height: 10.0),
@@ -232,10 +232,10 @@ class CaretComponent extends GetWidget<HomeController>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Shipping",
+                            "Shipping".tr,
                             style: TextStyle(color: Colors.grey, fontSize: 14.0),
                           ),
-                          Text("Freeship", style: TextStyle(fontSize: 14.0)),
+                          Text("freeShip".tr, style: TextStyle(fontSize: 14.0)),
                         ],
                       ),
                       const SizedBox(height: 10.0),
@@ -249,10 +249,10 @@ class CaretComponent extends GetWidget<HomeController>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Total",
+                            "total".tr,
                             style: TextStyle(color: Colors.grey, fontSize: 14.0),
                           ),
-                          Obx(()=> Text("\$${controller.total.value}", style: TextStyle(fontSize: 14.0))),
+                          Obx(()=> Text("${controller.total.value} EGP", style: TextStyle(fontSize: 14.0))),
                         ],
                       ),
                       const SizedBox(height: 10.0),
@@ -274,7 +274,7 @@ class CaretComponent extends GetWidget<HomeController>{
                           ),
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           child: Text(
-                            "Proceed to checkout",
+                            "proceedToCheckout".tr,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.0,
@@ -283,7 +283,7 @@ class CaretComponent extends GetWidget<HomeController>{
                           ),
                         ),
                         onTap: () {
-                          Get.to(CheckOutScreen(controller.total.value,controller.cartItems));
+                          Get.to(CheckOutScreen(controller.total.value,HomeController.cartItems));
                         },
                       ),
                       const SizedBox(height: 5.0),

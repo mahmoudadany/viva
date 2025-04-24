@@ -23,48 +23,52 @@ class VerificationScreen extends GetWidget<AuthController> {
           children: [
             Image(image: AssetImage('assets/icons/email.png'), height: 100.0),
             const SizedBox(height: 10.0),
-            authPageText(text: "Verify your email address"),
+            authPageText(text: "VerifyEmail".tr),
             const SizedBox(height: 10.0),
-            const Text(
-              "we have just send email verification link on your email. please check email and click on that link to verify your email address.",
-              maxLines: 3,
-              textAlign: TextAlign.center,
-            ),
+            Text("verifyMassage".tr, maxLines: 3, textAlign: TextAlign.center),
             const SizedBox(height: 20.0),
-            const Text(
-              "If not auto redirected after verification, click on the continue button.",
-              textAlign: TextAlign.center,
-            ),
+            Text("confirmEmail".tr, textAlign: TextAlign.center),
             const SizedBox(height: 10.0),
             GetX<AuthController>(
-              builder:(controller) =>  mainButton(
-                text: "continue",
-                textColor: Colors.black,
-                backGroundColor: Colors.white,
-                onpressed: () {
-                  controller.checkEmailVerifyWithContinueButton();
-                },
-                child: controller.isLoadingContinue.value? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children:
-                  [
-                    SizedBox(
-                        height: 25.0,
-                        width: 25.0,
-                        child: CircularProgressIndicator(color: Colors.black,)),
-                    const SizedBox(width: 10.0,),
-                    Text("Loading...",style: TextStyle(color: Colors.black,fontSize: 20.0),),
-                  ],
-                ):Text(
-                  "continue",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+              builder:
+                  (controller) => mainButton(
+                    text: "continue".tr,
+                    textColor: Colors.black,
+                    backGroundColor: Colors.white,
+                    onpressed: () {
+                      controller.checkEmailVerifyWithContinueButton();
+                    },
+                    child:
+                        controller.isLoadingContinue.value
+                            ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                  height: 25.0,
+                                  width: 25.0,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(width: 10.0),
+                                Text(
+                                  "loading".tr,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ],
+                            )
+                            : Text(
+                              "continue".tr,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
                   ),
-                ),
-
-              ),
             ),
             const SizedBox(height: 20.0),
             GetX<AuthController>(
@@ -83,7 +87,7 @@ class VerificationScreen extends GetWidget<AuthController> {
                       child: Text(
                         controller.timerResendController.value != 0
                             ? "Resend E-Mail Link 0:${controller.timerResendController.value}"
-                            : "Resend E-Mail Link",
+                            : "resendEmail".tr,
                         style: TextStyle(
                           color:
                               controller.timerResendController.value != 0
@@ -97,11 +101,11 @@ class VerificationScreen extends GetWidget<AuthController> {
             const SizedBox(height: 10.0),
             TextButton(
               onPressed: () {
-                controller.backToLoginScreen=true;
+                controller.backToLoginScreen = true;
                 Get.off(LoginScrenn());
               },
               child: Text(
-                "back to login",
+                "backToLogin".tr,
                 style: TextStyle(color: Colors.blue),
               ),
             ),
@@ -111,35 +115,3 @@ class VerificationScreen extends GetWidget<AuthController> {
     );
   }
 }
-
-// return Scaffold(
-// appBar: AppBar(),
-// body: Padding(
-// padding: const EdgeInsets.all(20.0),
-// child: SingleChildScrollView(
-// child: Column(
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// authPageText(text: "verificationCode".tr),
-// const SizedBox(height: 10.0),
-// Text("verificationCodeMassage".tr),
-// const SizedBox(height: 10.0),
-// authTextField(
-// controller: TextEditingController(),
-// label: "enterVerificationCode".tr,
-// hint: "enterVerificationCode".tr,
-// inputType: TextInputType.number,
-// preFixIcon: Icons.verified_user_outlined,
-// ),
-// const SizedBox(height: 10.0),
-// Text("resend in 00:30"),
-// const SizedBox(height: 20.0),
-// Align(
-// alignment: Alignment.center,
-// child: mainButton(onpressed: () {}, text: "confirm".tr),
-// ),
-// ],
-// ),
-// ),
-// ),
-// );

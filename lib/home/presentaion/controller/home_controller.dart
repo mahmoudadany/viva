@@ -20,7 +20,6 @@ import 'package:viva/home/presentaion/components/home_component.dart';
 import 'package:viva/home/presentaion/screens/home_screen.dart';
 
 import '../../../core/utilies/services/firebase_services/firebase_services.dart';
-import '../screens/cart_screen.dart';
 
 class HomeController extends GetxController {
   final RxBool homeLoading = false.obs;
@@ -29,7 +28,7 @@ class HomeController extends GetxController {
   RxBool male = false.obs;
   RxBool feMale = false.obs;
   RxBool darkMode = false.obs;
-  RxBool isArabic = false.obs;
+  RxBool isArabic = GetLocalStorage.getLngState()=="en"? false.obs : true.obs;
   RxBool visibleSimilarProduct = false.obs;
   RxBool visibleDescription = false.obs;
   RxBool visibleReviews = false.obs;
@@ -40,8 +39,9 @@ class HomeController extends GetxController {
   RxList femaleProduct = [].obs;
   RxList topRatedProduct = [].obs;
   RxList allAd = [].obs;
-  var cartItems = <CartItemModel>[].obs;
-  Rx<MainUser?> userData = GetLocalStorage.getUser().obs;
+  static var cartItems = <CartItemModel>[].obs;
+  static var orderItems = [].obs;
+  static Rx<MainUser?> userData = GetLocalStorage.getUser().obs;
   RxList featureProduct = [].obs;
   late Product cartProduct;
   var productPrice = 0.obs;
@@ -73,11 +73,12 @@ class HomeController extends GetxController {
   }
 
   Rx<Widget> component() {
+
     switch (bottomBarIndex.value) {
       case 0:
         return HomeComponent().obs;
       case 1:
-        return CaretComponent().obs;
+          return CaretComponent().obs;
       case 2:
         return AccountComponent().obs;
       default:
@@ -98,22 +99,6 @@ class HomeController extends GetxController {
       }
     });
   }
-
-  // void addToCart() async {
-  //   try {
-  //     await FirebaseServices.addItemInListOfCollection(
-  //       AppConstant.users,
-  //       'oiIE1VsNfbUBxW6SDX81nnam08P2',
-  //       [CartItemModel.fromProduct(cartProduct, 1, true).toFirebase()],
-  //       'cartItem',
-  //     ).then((value) async {
-  //       getCartItems();
-  //     });
-  //   } catch (e) {
-  //     print("glal ${e.toString()}");
-  //     Get.snackbar("firebase", "message");
-  //   }
-  // }
 
   void addToCart(Product product,String color) {
     try{
@@ -142,9 +127,15 @@ class HomeController extends GetxController {
     },);
   }
 
+  Future<void> getOrderItems() async {
+    var response=await FirebaseServices.getOrderItems();
+    orderItems.value=response.get("allOrder");
+    orderItems.refresh();
+
+  }
+
   void getWearCategory() async {
     try {
-       // await setData(list);
       homeLoading.value = true;
       BaseHomeRemoteDataSource baseHomeRemoteDataSource =
           HomeRemoteDataSource();
@@ -303,12 +294,3 @@ class HomeController extends GetxController {
   }
 }
 
-
-// print("llll ${value.length}");
-// for (int i=0;i<value.length;i++) {
-// int date=dataMethod(value[i].date);
-// print("ssss $date");
-// if(date<=7){
-// // featureProduct.add(element);
-// }
-// }

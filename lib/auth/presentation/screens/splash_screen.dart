@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:viva/core/utilies/services/app_services.dart';
 
 import '../../../core/utilies/app_constant.dart';
 import '../../../core/utilies/local_storage/get_storage.dart';
@@ -14,7 +15,7 @@ class SplashScreen extends StatelessWidget {
     test();
     return Scaffold(
       body: Center(
-        child: Text("splash screen"),
+        child: Image.asset("assets/images/viva_store.png"),
       ),
     );
   }
@@ -22,7 +23,8 @@ class SplashScreen extends StatelessWidget {
 
 
 void test() async{
-  bool state= await GetLocalStorage.get(AppConstant.userState);
+  // bool state= await GetLocalStorage.getUserState();
   Future.delayed(Duration(seconds: 1),() {
-    state? Get.off(HomeScreen()):Get.off(LoginScrenn());
+    Get.off(AppServices.showScreen());
+    // state? Get.off(HomeScreen()):Get.off(LoginScrenn());
   },);}

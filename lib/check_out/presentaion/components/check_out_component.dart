@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:viva/check_out/data/data_source/stripe_payment/stripe_manager.dart';
 import 'package:viva/check_out/presentaion/components/components.dart';
 import 'package:viva/check_out/presentaion/controller/check_out_conttroller.dart';
+import 'package:viva/check_out/presentaion/screens/check_out_screen.dart';
 import 'package:viva/core/globle/app_color/app_color_light.dart';
 import 'package:viva/home/presentaion/controller/home_controller.dart';
 import 'package:viva/home/presentaion/screens/home_screen.dart';
@@ -20,7 +22,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
       ),
       child: Form(
         key: form,
-        child: Obx(() =>  Stepper(
+        child: Obx(() => Stepper(
             elevation: 0,
             type: StepperType.horizontal,
             currentStep: controller.currentStep.value,
@@ -65,16 +67,16 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:
                   [
-                    const Text("step 1"),
-                    const Text("Shipping",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+                    Text("step1".tr),
+                    Text("shipping".tr,style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10.0,),
                     checkOutTextField(
                       controller: controller.cityController,
-                      hint: "City",
+                      hint: "city".tr,
                       inputType: TextInputType.text,
                       validator: (value) {
                         if(value!.isEmpty){
-                          return "please enter city name";
+                          return "cityEmpty".tr;
                         }
                         return null;
                       },
@@ -85,11 +87,11 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                     const SizedBox(height: 10.0,),
                     checkOutTextField(
                       controller: controller.streetNameController,
-                      hint: "Street Name",
+                      hint: "street".tr,
                       inputType: TextInputType.text,
                       validator: (value) {
                         if(value!.isEmpty){
-                          return "please enter your street name";
+                          return "streetEmpty".tr;
                         }
                         return null;
                       },
@@ -100,20 +102,20 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                     const SizedBox(height: 10.0,),
                     checkOutTextField(
                       controller: controller.phoneNumberController,
-                      hint: "Phone Number",
+                      hint: "phoneNumber".tr,
                       inputType: TextInputType.phone,
                       validator: (value) {
                         if(value!.isEmpty){
-                          return "please enter your phone number";
+                          return "phoneNumberEmpty".tr;
                         }
                         if(value.length!=11){
-                          return "phone number should have 11 number";
+                          return "phoneNumberLength".tr;
                         }
                         value[0];
                         if(value[0]=="0"&&value[1]=="1"){
 
                         }else{
-                          return "phone number should start 01";
+                          return "phoneNumber01".tr;
                         }
                         if(value[2]=="0"||value[2]=="1"||value[2]=="2"||value[2]=="5"){
 
@@ -127,7 +129,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                       },
                     ),
                     const SizedBox(height: 30.0,),
-                    Text("Shipping Method",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+                    Text("shippingMethod".tr,style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
                     const SizedBox(height: 20.0,),
                     Obx(() => RadioMenuButton<int>(
                         value: 1,
@@ -136,20 +138,20 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                           controller.selectedShipping.value=value!;
                           controller.delivery.value=0;
                         },
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:
                           [
                             Row(
                               children:
                               [
-                                Text("Free",style: TextStyle(fontSize: 18.0),),
+                                Text("free".tr,style: TextStyle(fontSize: 18.0),),
                                 SizedBox(width: 20.0,),
-                                Text("Delivery to home",style: TextStyle(color: Colors.grey),),
+                                Text("delivery".tr,style: TextStyle(color: Colors.grey),),
                               ],
                             ),
                             SizedBox(height: 10.0,),
-                            Text("Delivery from 6 to 7 business days",style: TextStyle(color: Colors.grey),),
+                            Text("delivery67".tr,style: TextStyle(color: Colors.grey),),
                           ],
                         ),
                       ),
@@ -163,7 +165,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                           controller.delivery.value=25;
 
                         },
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:
                           [
@@ -171,13 +173,13 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
 
                               children:
                               [
-                                Text("\$ 5.00",style: TextStyle(fontSize: 18.0),),
+                                Text("25 EGP",style: TextStyle(fontSize: 18.0),),
                                 SizedBox(width: 20.0,),
-                                Text("Delivery to home",style: TextStyle(color: Colors.grey),),
+                                Text("delivery".tr,style: TextStyle(color: Colors.grey),),
                               ],
                             ),
                             SizedBox(height: 10.0,),
-                            Text("Delivery from 4 to 5 business days",style: TextStyle(color: Colors.grey),),
+                            Text("delivery45".tr,style: TextStyle(color: Colors.grey),),
                           ],
                         ),
                       ),
@@ -191,7 +193,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                           controller.delivery.value=50;
 
                         },
-                        child: const Column(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:
                           [
@@ -199,13 +201,13 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
 
                               children:
                               [
-                                Text("\$ 7.00",style: TextStyle(fontSize: 18.0),),
+                                Text("50 EGP",style: TextStyle(fontSize: 18.0),),
                                 SizedBox(width: 20.0,),
-                                Text("Delivery to home",style: TextStyle(color: Colors.grey),),
+                                Text("delivery".tr,style: TextStyle(color: Colors.grey),),
                               ],
                             ),
                             SizedBox(height: 10.0,),
-                            Text("Delivery from 2 to 3 business days",style: TextStyle(color: Colors.grey),),
+                            Text("delivery23".tr,style: TextStyle(color: Colors.grey),),
                           ],
                         ),
                       ),
@@ -220,152 +222,11 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:
                   [
-                    const Text("step 1"),
-                    const Text("Payment",style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
+                    Text("step2".tr),
+                    Text("payment".tr,style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10.0,),
-                    // Obx(
-                    //   () => Row(
-                    //     children:
-                    //     [
-                    //       Expanded(
-                    //         child: GestureDetector(
-                    //           child: Container(
-                    //             padding: const EdgeInsetsDirectional.all(10.0),
-                    //             decoration: BoxDecoration(
-                    //               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    //               color: controller.paymentMethod.value==0? Colors.grey : Colors.white,
-                    //               boxShadow: const [
-                    //                 BoxShadow(
-                    //                   color: Colors.grey,
-                    //                   spreadRadius: 2,
-                    //                   blurRadius: 10,
-                    //                   offset: Offset(4, 4),
-                    //                 ),
-                    //               ],
-                    //
-                    //             ),
-                    //             child: Column(
-                    //               children:
-                    //               [
-                    //                 Image.asset("assets/icons/cash.png",color: controller.paymentMethod.value==0? Colors.white : Colors.grey,),
-                    //                 const SizedBox(height: 5.0,),
-                    //                 Text(
-                    //                   "Cash",
-                    //                   style: TextStyle(
-                    //                     color: controller.paymentMethod.value==0? Colors.white : Colors.black,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           onTap: () {
-                    //             controller.paymentMethod.value=0;
-                    //           },
-                    //         ),
-                    //       ),
-                    //       const SizedBox(width: 10.0,),
-                    //       Expanded(
-                    //         child: GestureDetector(
-                    //           child: Container(
-                    //             padding: const EdgeInsetsDirectional.all(10.0),
-                    //             decoration:  BoxDecoration(
-                    //               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    //               color: controller.paymentMethod.value==1? Colors.grey : Colors.white,
-                    //               boxShadow: const [
-                    //                 BoxShadow(
-                    //                   color: Colors.grey,
-                    //                   spreadRadius: 2,
-                    //                   blurRadius: 10,
-                    //                   offset: Offset(4, 4),
-                    //                 ),
-                    //               ],
-                    //
-                    //             ),
-                    //             child: Column(
-                    //               children:
-                    //               [
-                    //                 Image.asset("assets/icons/credit_card_Icon.png",color: controller.paymentMethod.value==1? Colors.white : Colors.grey,),
-                    //                 const SizedBox(height: 5.0,),
-                    //                 Text(
-                    //                   "Credit Card",
-                    //                   style: TextStyle(
-                    //                     color: controller.paymentMethod.value==1? Colors.white : Colors.black,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           onTap: () {
-                    //             controller.paymentMethod.value=1;
-                    //           },
-                    //         ),
-                    //       ),
-                    //       const SizedBox(width: 10.0,),
-                    //       Expanded(
-                    //         child: GestureDetector(
-                    //           child: Container(
-                    //             padding: const EdgeInsetsDirectional.all(10.0),
-                    //             decoration: BoxDecoration(
-                    //               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                    //               color: controller.paymentMethod.value==2? Colors.grey :Colors.white,
-                    //               boxShadow: const [
-                    //                  BoxShadow(
-                    //                   color: Colors.grey,
-                    //                   spreadRadius: 2,
-                    //                   blurRadius: 10,
-                    //                   offset: Offset(4, 4),
-                    //                 ),
-                    //               ],
-                    //
-                    //             ),
-                    //             child: Column(
-                    //               children:
-                    //               [
-                    //                 Image.asset("assets/icons/vodafone.png",color: controller.paymentMethod.value==2? Colors.white : Colors.grey,),
-                    //                 const SizedBox(height: 5.0,),
-                    //                 Text(
-                    //                   "VCash",
-                    //                   style: TextStyle(
-                    //                     color: controller.paymentMethod.value==2? Colors.white : Colors.black,
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           onTap: () {
-                    //             controller.paymentMethod.value=2;
-                    //           },
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     const SizedBox(height: 10.0,),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children:
-                    //   [
-                    //     const Text(
-                    //       "Choose your card",
-                    //       style: TextStyle(
-                    //         fontSize: 16,
-                    //         fontWeight: FontWeight.bold,
-                    //       ),
-                    //     ),
-                    //     TextButton(
-                    //       child: const Text(
-                    //         "Add new+",
-                    //         style: TextStyle(
-                    //           fontSize: 12,
-                    //           color: Colors.red
-                    //         ),
-                    //       ),
-                    //       onPressed: () {
-                    //
-                    //       },
-                    //     ),
-                    //   ],
-                    // ),
+
                     const SizedBox(height: 10.0,),
                     Container(
                       child: Align(
@@ -377,10 +238,10 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Product Price",
+                                  "productPrice".tr,
                                   style: TextStyle(color: Colors.grey, fontSize: 14.0),
                                 ),
-                                Obx(()=> Text("\$${controller.cartProductPrice.value}", style: TextStyle(fontSize: 14.0))),
+                                Obx(()=> Text("${controller.cartProductPrice.value} EGP", style: TextStyle(fontSize: 14.0))),
                               ],
                             ),
                             const SizedBox(height: 10.0),
@@ -394,7 +255,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Delivery",
+                                  "delivery".tr,
                                   style: TextStyle(color: Colors.grey, fontSize: 14.0),
                                 ),
                                 Text(controller.delivery.value.toString(), style: TextStyle(fontSize: 14.0)),
@@ -411,10 +272,10 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  "Total",
+                                  "total".tr,
                                   style: TextStyle(color: Colors.grey, fontSize: 14.0),
                                 ),
-                                Obx(()=> Text("\$${controller.total.value}", style: TextStyle(fontSize: 14.0))),
+                                Obx(()=> Text("${controller.total.value} EGP", style: TextStyle(fontSize: 14.0))),
                               ],
                             ),
                             const SizedBox(height: 10.0),
@@ -436,7 +297,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                                 ),
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 child: Text(
-                                  "Go To Pay ${controller.total.value} EGP",
+                                  "${"goToPay".tr} ${controller.total.value} EGP",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.0,
@@ -445,8 +306,7 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                                 ),
                               ),
                               onTap: () {
-                                // Get.to(CheckOutScreen(controller.cartItems));
-                                // StripeManager.paymentIn(controller.total.value, "EGP",context);
+                                controller.payment(controller.total.value, "EGP",context);
                               },
                             ),
                             const SizedBox(height: 5.0),
@@ -463,8 +323,8 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                   isActive: controller.currentStep.value>=2,
                   content: Column(
                     children: [
-                      const Text(
-                        "Order Completed",
+                      Text(
+                        "orderCompleted".tr,
                         style: TextStyle(
                           fontSize: 25.0,
                           fontWeight: FontWeight.bold,
@@ -473,9 +333,9 @@ class CheckOutComponent extends GetWidget<CheckOutController>{
                       const SizedBox(height: 40.0,),
                       Image.asset('assets/images/order.png'),
                       const SizedBox(height: 40.0,),
-                      const Text(
+                      Text(
                         textAlign: TextAlign.center,
-                        "thank your for your purchase \n you can view your order in my orders \n section",
+                        "thank".tr,
                         style: TextStyle(
                           fontSize: 14.0
                         ),

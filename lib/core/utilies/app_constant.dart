@@ -7,7 +7,7 @@ class AppConstant{
   static String onBoardState='onBoardState';
   static String userState='state';
   static String darkModeState='darkMode';
-  static String isArabic='lang';
+  static String langState='lang';
   static String genderState='gender';
   static String male='male';
   static String female='female';

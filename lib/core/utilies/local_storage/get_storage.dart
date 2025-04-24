@@ -25,6 +25,9 @@ class GetLocalStorage{
   static String getGenderState() {
     return GetStorage().read(AppConstant.genderState)??"male";
   }
+  static String getLngState() {
+    return GetStorage().read(AppConstant.langState)??"en";
+  }
   static MainUser? getUser() {
     return GetStorage().read(AppConstant.userData);
   }

@@ -19,7 +19,7 @@ class ShowAllProduct extends GetWidget<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:
           [
-            Text("Found \n ${wearProducts.length} Results"),
+            Text("${"found".tr} \n ${wearProducts.length} ${"results".tr}"),
             const SizedBox(height: 10.0,),
             Expanded(
               child: GridView.builder(

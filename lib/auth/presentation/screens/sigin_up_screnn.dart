@@ -47,7 +47,7 @@ class SignUpScreen extends StatelessWidget {
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "please enter your name";
+                      return "nameEmpty".tr;
                     }
                     return null;
                   },
@@ -67,10 +67,10 @@ class SignUpScreen extends StatelessWidget {
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Email shoud not be empty";
+                      return "emailEmpty".tr;
                     }
                     if (!(value.contains('@') && value.contains(".com"))) {
-                      return "email address fromat ****@****.com";
+                      return "emailFormat".tr;
                     }
                     return null;
                   },
@@ -103,10 +103,10 @@ class SignUpScreen extends StatelessWidget {
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Password should not be empty";
+                            return "PasswordEmpty".tr;
                           }
                           if (value.length < 8) {
-                            return "password length is low";
+                            return "passwordLow".tr;
                           }
                           return null;
                         },
@@ -141,14 +141,14 @@ class SignUpScreen extends StatelessWidget {
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Password should not be empty";
+                            return "PasswordEmpty";
                           }
                           if (value.length < 8) {
                             return "password length is low";
                           }
                           if (value !=
                               controller.signUpPasswordController.text) {
-                            return "password not match confirm password";
+                            return "PasswordNotMatch".tr;
                           }
                           return null;
                         },
@@ -179,7 +179,7 @@ class SignUpScreen extends StatelessWidget {
                               width: 25.0,
                               child: CircularProgressIndicator(color: Colors.white,)),
                           const SizedBox(width: 10.0,),
-                          Text("Loading...",style: TextStyle(color: Colors.white,fontSize: 20.0),),
+                          Text("loading".tr,style: TextStyle(color: Colors.white,fontSize: 20.0),),
                         ],
                       ):Text(
                         "signUp".tr,

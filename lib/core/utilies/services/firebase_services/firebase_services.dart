@@ -3,19 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:viva/core/utilies/app_constant.dart';
 
 class FirebaseServices {
-
   static final FirebaseAuth auth = FirebaseAuth.instance;
 
   static final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   static Future<void> setDataInCollection(
     String collectionName,
-    Map<String, dynamic> value,
-      {
+    Map<String, dynamic> value, {
     String? key,
   }) async {
     try {
-      await firebaseFirestore.collection(collectionName).doc(key).set(value, SetOptions(merge: true));
+      await firebaseFirestore
+          .collection(collectionName)
+          .doc(key)
+          .set(value, SetOptions(merge: true));
     } catch (e) {
       rethrow;
     }
@@ -23,8 +24,7 @@ class FirebaseServices {
 
   static Future<void> setIdInCart(
     String collectionName,
-    Map<String, dynamic> value,
-      {
+    Map<String, dynamic> value, {
     String? key,
   }) async {
     try {
@@ -51,7 +51,7 @@ class FirebaseServices {
     String key,
     List list,
     listName,
-  ) async{
+  ) async {
     try {
       await firebaseFirestore.collection(collectionName).doc(key).update({
         '$listName': FieldValue.arrayUnion(list),
@@ -61,11 +61,47 @@ class FirebaseServices {
     }
   }
 
+  static Future<void> addItemInOrderCollection(
+    String collectionName,
+    String key,
+    List<Map> orders,
+    String city,
+    String street,
+    String phone,
+    int subTotal,
+  ) async {
+    try {
+      List<dynamic> currentList = [];
+      await firebaseFirestore.collection(collectionName).doc(key).get().then((value) async{
+        if (value.exists && value.data() != null) {
+          if( value.data()!["allOrder"] != null){
+            currentList=List.of(value.get("allOrder"));
+          }
+        }
+        currentList.add(
+          {
+            "date": "12-2-2025",
+            "city":city,
+            "street":street,
+            "phone":phone,
+            "subTotal": subTotal,
+            "orders": orders
+          },
+        );
+        await firebaseFirestore.collection(collectionName).doc(key).set({
+          'allOrder':  currentList,
+        }, );
+      },);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future<void> deleteDataInCollection(
     String collectionName,
     String key,
     Map<String, dynamic> value,
-  ) async{
+  ) async {
     try {
       await firebaseFirestore.collection(collectionName).doc(key).delete();
     } catch (e) {
@@ -83,15 +119,33 @@ class FirebaseServices {
 
   static Future<DocumentSnapshot> getCartItems() async {
     try {
-      return await firebaseFirestore.collection("cart").doc(auth.currentUser!.uid).get();
+      return await firebaseFirestore
+          .collection("cart")
+          .doc(auth.currentUser!.uid)
+          .get();
     } catch (e) {
       rethrow;
     }
   }
+
+  static Future<DocumentSnapshot> getOrderItems() async {
+    try {
+      return await firebaseFirestore
+          .collection("order")
+          .doc(auth.currentUser!.uid)
+          .get();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future<DocumentSnapshot> getUser() async {
     try {
       await auth.currentUser!.reload();
-      return await firebaseFirestore.collection(AppConstant.users).doc(auth.currentUser!.uid).get();
+      return await firebaseFirestore
+          .collection(AppConstant.users)
+          .doc(auth.currentUser!.uid)
+          .get();
     } catch (e) {
       rethrow;
     }
@@ -139,7 +193,4 @@ class FirebaseServices {
       rethrow;
     }
   }
-
-
-
 }

@@ -53,7 +53,7 @@ class HomeComponent extends GetWidget<HomeController> {
                                     ),
                                   ),
                                   const SizedBox(height: 5.0),
-                                  Text("Female"),
+                                  Text("female".tr),
                                 ],
                               ),
                               onTap: () {
@@ -80,7 +80,7 @@ class HomeComponent extends GetWidget<HomeController> {
                                     ),
                                   ),
                                   const SizedBox(height: 5.0),
-                                  Text("Male"),
+                                  Text("male".tr),
                                 ],
                               ),
                               onTap: () {
@@ -108,7 +108,7 @@ class HomeComponent extends GetWidget<HomeController> {
                                     ),
                                   ),
                                   const SizedBox(height: 5.0),
-                                  Text("Products"),
+                                  Text("product".tr),
                                 ],
                               ),
                               onTap: () {
@@ -128,7 +128,7 @@ class HomeComponent extends GetWidget<HomeController> {
                                     ),
                                   ),
                                   const SizedBox(height: 5.0),
-                                  Text("Orders"),
+                                  Text("order".tr),
                                 ],
                               ),
                               onTap: () {
@@ -175,11 +175,6 @@ class HomeComponent extends GetWidget<HomeController> {
                                     ),
                                   ),
                                   Expanded(
-                                      // Image(
-                                      //   image:NetworkImage(e.adImage),
-                                      //   fit: BoxFit.cover,
-                                      //   width: double.infinity,
-                                      // ),
                                     child: CachedNetworkImage(
                                       imageUrl: e.adImage,width: double.infinity,fit: BoxFit.cover,
                                       errorWidget: (context, url, error) => Center(child: Icon(Icons.error_outline),),
@@ -197,66 +192,23 @@ class HomeComponent extends GetWidget<HomeController> {
                               autoPlayCurve: Curves.fastOutSlowIn,
                             ),
                           ),
-                          // child: ListView.separated(
-                          //   scrollDirection: Axis.horizontal,
-                          //   itemCount: controller.allAd.length,
-                          //   itemBuilder: (context, index) =>
-                          //       Container(
-                          //         height: 200.0,
-                          //         width: 350,
-                          //         decoration: BoxDecoration(
-                          //           borderRadius: BorderRadius.circular(15.0),
-                          //           color: AppColorLight.containerColor,
-                          //         ),
-                          //         child: Column(
-                          //           mainAxisAlignment: MainAxisAlignment.start,
-                          //           crossAxisAlignment: CrossAxisAlignment.start,
-                          //           children: [
-                          //           Padding(
-                          //             padding: const EdgeInsets.all(5.0),
-                          //             child: Row(
-                          //               children: [
-                          //                 CircleAvatar(
-                          //                   radius: 20.0,
-                          //                   backgroundColor: Colors.grey.shade300,
-                          //                   child: Image(image: NetworkImage(controller.allAd[index].companyImage),width: 25.0,height: 25.0,),
-                          //                 ),
-                          //                 const SizedBox(width: 10.0),
-                          //                 Text(
-                          //                   controller.allAd[index].companyName,
-                          //                   style: TextStyle(fontSize: 20.0),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //           Expanded(
-                          //             child: Image(
-                          //               image:NetworkImage(controller.allAd[index].adImage),
-                          //               fit: BoxFit.cover,
-                          //               width: double.infinity,
-                          //             ),
-                          //           ),
-                          //                                     ],
-                          //                                   ),
-                          //       ),
-                          //   separatorBuilder: (context, index) => const SizedBox(width: 10.0,),
-                          // ),
+
                         ),
                       ),
                       const SizedBox(height: 10.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "future Products",
+                          Text(
+                            "futureProduct".tr,
                             style: TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextButton(
-                            child: const Text(
-                              "Show all",
+                            child: Text(
+                              "showAll".tr,
                               style: TextStyle(color: Colors.grey),
                             ),
                             onPressed: () {
@@ -314,10 +266,10 @@ class HomeComponent extends GetWidget<HomeController> {
                                         ),
                                         const SizedBox(height: 3.0),
                                         Text(
-                                          '\$ ${controller.allProduct[index].price}',
+                                          '${controller.allProduct[index].price} EGP',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 25.0,
+                                            fontSize: 22.0,
                                           ),
                                         ),
                                       ],
@@ -333,16 +285,16 @@ class HomeComponent extends GetWidget<HomeController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Recommended",
+                          Text(
+                            "recommended".tr,
                             style: TextStyle(
                               fontSize: 25.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           TextButton(
-                            child: const Text(
-                              "Show all",
+                            child: Text(
+                              "showAll".tr,
                               style: TextStyle(color: Colors.grey),
                             ),
                             onPressed: () {
@@ -396,10 +348,10 @@ class HomeComponent extends GetWidget<HomeController> {
                                   ),
                                   const SizedBox(height: 3.0),
                                   Text(
-                                    '\$ ${controller.allProduct[index].price}',
+                                    '${controller.allProduct[index].price} EGP',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 25.0,
+                                      fontSize: 22.0,
                                     ),
                                   ),
                                 ],
@@ -411,133 +363,8 @@ class HomeComponent extends GetWidget<HomeController> {
                           itemCount: controller.customProduct.length,
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 70.0,
-                      //   width: double.infinity,
-                      //   child: Obx(()=>ListView.separated(
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemBuilder:
-                      //           (context, index) => GestureDetector(
-                      //             onTap: () {
-                      //               Get.to(DisplayItem(controller.customProduct[index]));
-                      //             },
-                      //             child: Row(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment: CrossAxisAlignment.start,
-                      //               children: [
-                      //                 SizedBox(
-                      //                   height: 70.0,
-                      //                   width: 70.0,
-                      //                   child: Image(image: NetworkImage(controller.customProduct[index].images[0])),
-                      //                 ),
-                      //                 const SizedBox(width: 5.0),
-                      //                 SizedBox(
-                      //                   width: 120,
-                      //                   child: Column(
-                      //                     crossAxisAlignment:
-                      //                         CrossAxisAlignment.start,
-                      //                     mainAxisSize: MainAxisSize.min,
-                      //                     children: [
-                      //                       Text(
-                      //                         controller.customProduct[index].title,
-                      //                         style: const TextStyle(
-                      //                           fontWeight: FontWeight.bold,
-                      //                           overflow: TextOverflow.ellipsis,
-                      //                         ),
-                      //                         overflow: TextOverflow.ellipsis,
-                      //                         maxLines: 1,
-                      //                       ),
-                      //                       const SizedBox(height: 3.0),
-                      //                       Text(
-                      //                         '\$ ${controller.customProduct[index].price}',
-                      //                         style: const TextStyle(
-                      //                           fontWeight: FontWeight.bold,
-                      //                           fontSize: 25.0,
-                      //                         ),
-                      //                         overflow: TextOverflow.ellipsis,
-                      //                         maxLines: 1,
-                      //                       ),
-                      //                     ],
-                      //                   ),
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ),
-                      //       separatorBuilder:
-                      //           (context, index) => const SizedBox(width: 10.0),
-                      //       itemCount: controller.customProduct.length,
-                      //     ),
-                      //   ),
-                      // ),
                       const SizedBox(height: 10.0),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     const Text(
-                      //       "Top Collection",
-                      //       style: TextStyle(
-                      //         fontSize: 25.0,
-                      //         fontWeight: FontWeight.bold,
-                      //       ),
-                      //     ),
-                      //     TextButton(
-                      //       child: const Text(
-                      //         "Show all",
-                      //         style: TextStyle(color: Colors.grey),
-                      //       ),
-                      //       onPressed: () {},
-                      //     ),
-                      //   ],
-                      // ),
-                      // const SizedBox(height: 10.0),
-                      // SizedBox(
-                      //   height: 70.0,
-                      //   width: double.infinity,
-                      //   child: ListView.separated(
-                      //     scrollDirection: Axis.horizontal,
-                      //     itemBuilder:
-                      //         (context, index) => Row(
-                      //           children: [
-                      //             SizedBox(
-                      //               height: 70.0,
-                      //               width: 70.0,
-                      //               child: Image.asset(
-                      //                 'assets/images/onboarding1.png',
-                      //               ),
-                      //             ),
-                      //             const SizedBox(width: 5.0),
-                      //             Column(
-                      //               crossAxisAlignment:
-                      //                   CrossAxisAlignment.start,
-                      //               mainAxisSize: MainAxisSize.min,
-                      //               children: [
-                      //                 Text(
-                      //                   'Turtleneck sweater',
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                   ),
-                      //                   overflow: TextOverflow.ellipsis,
-                      //                   maxLines: 1,
-                      //                 ),
-                      //                 const SizedBox(height: 3.0),
-                      //                 Text(
-                      //                   '\$ 39.99',
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 25.0,
-                      //                   ),
-                      //                   overflow: TextOverflow.ellipsis,
-                      //                   maxLines: 1,
-                      //                 ),
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         ),
-                      //     separatorBuilder:
-                      //         (context, index) => const SizedBox(width: 10.0),
-                      //     itemCount: 10,
-                      //   ),
-                      // ),
+
                     ],
                   ),
                 ),

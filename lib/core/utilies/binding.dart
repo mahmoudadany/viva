@@ -7,7 +7,7 @@ import 'package:viva/home/presentaion/controller/home_controller.dart';
 class AppBinding extends Bindings{
   @override
   void dependencies() {
-    Get.lazyPut<AuthController>(() => AuthController(),fenix: true);
+    Get.put(AuthController(), permanent: true);
     Get.lazyPut<HomeController>(() => HomeController(),fenix: true);
     Get.lazyPut<CheckOutController>( () => CheckOutController(),fenix: true);
   }

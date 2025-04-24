@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 Widget checkOutEmpty(){
   return Column(
@@ -12,8 +13,8 @@ Widget checkOutEmpty(){
         child: SvgPicture.asset('assets/images/cart_empty.svg'),
       ),
       const SizedBox(height: 10.0,),
-      const Text(
-        "Cart Empty",
+      Text(
+        "cartEmpty".tr,
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20.0

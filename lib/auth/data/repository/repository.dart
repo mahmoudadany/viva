@@ -5,14 +5,17 @@ import 'package:viva/auth/domain/base_repository/base_auth_repository.dart';
 import 'package:viva/auth/domain/entities/user.dart';
 import 'package:viva/core/exception/failure.dart';
 
-
 class AuthRepository extends BaseAuthRepository {
-
   BaseFirebaseAuthRemoteDataSource baseFirebaseAuthRemoteDataSource;
+
   AuthRepository._(this.baseFirebaseAuthRemoteDataSource);
-  static   AuthRepository? _authRepository;
-  factory AuthRepository(BaseFirebaseAuthRemoteDataSource baseFirebaseAuthRemoteDataSource) {
-     _authRepository ??= AuthRepository._(baseFirebaseAuthRemoteDataSource);
+
+  static AuthRepository? _authRepository;
+
+  factory AuthRepository(
+    BaseFirebaseAuthRemoteDataSource baseFirebaseAuthRemoteDataSource,
+  ) {
+    _authRepository ??= AuthRepository._(baseFirebaseAuthRemoteDataSource);
     return _authRepository!;
   }
 

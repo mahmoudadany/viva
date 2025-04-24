@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:viva/check_out/data/data_source/stripe_payment/stripe_manager.dart';
 import 'package:viva/home/presentaion/controller/home_controller.dart';
 
-
 import '../components/cared_component.dart';
 
 class HomeScreen extends GetWidget<HomeController> {
@@ -11,23 +10,16 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.getProductPrice();
+      controller.getTotal();
+      controller.getCartItems();
+      controller.total.refresh();
+      controller.productPrice.refresh();
+    });
+
     return Scaffold(
-      appBar: AppBar(
-        // leading: IconButton(
-        //   onPressed: () {},
-        //   icon: Image.asset("assets/icons/list.png"),
-        // ),
-        title: Text("vivaStore".tr),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () async{
-              // await StripeManager.paymentIn(1000, "EGP",context);
-            },
-            icon: Icon(Icons.notifications_on_outlined, size: 30.0),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text("viva".tr), centerTitle: true),
       body: Obx(() => controller.component().value),
       bottomNavigationBar: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -38,22 +30,17 @@ class HomeScreen extends GetWidget<HomeController> {
           () => BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
-                activeIcon: Text('Home'),
+                activeIcon: Text('home'.tr),
                 icon: Icon(Icons.house_outlined),
                 label: '',
               ),
-              // BottomNavigationBarItem(
-              //   activeIcon: Text('Search'),
-              //   icon: Icon(Icons.search_outlined),
-              //   label: '',
-              // ),
               BottomNavigationBarItem(
-                activeIcon: Text('Cart'),
+                activeIcon: Text('cart'.tr),
                 icon: Icon(Icons.shopping_bag_outlined),
                 label: '',
               ),
               BottomNavigationBarItem(
-                activeIcon: Text('Account'),
+                activeIcon: Text('account'.tr),
                 icon: Icon(Icons.person),
                 label: '',
               ),
@@ -68,7 +55,3 @@ class HomeScreen extends GetWidget<HomeController> {
     );
   }
 }
-
-
-
-
